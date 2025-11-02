@@ -82,3 +82,13 @@ if __name__ == "__main__":
     # Bind to host and port that Render (or any host) expects
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+@app.route("/convert", methods=["POST"])
+def convert():
+    file = request.files.get("file")
+    if not file:
+        return "No file uploaded", 400
+
+    file.save("uploaded.pdf")
+    # Your PDF → MP3 conversion code here
+    return "File converted!"  # For now, just a placeholder
